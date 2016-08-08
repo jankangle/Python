@@ -80,10 +80,78 @@ def newinp():
     auxis_set.bind('<Return>', updatevalue)
     auxis_set.grid(column=4,row=5)
 
-    shelltyp=
+    shelltyp_ti = ttk.Label(TOP, text="Shell type:")
+    shelltyp_ti.grid(column=1,row=6)
 
+    shelltyp_list=('RKS','ROKS','UKS')
+    shelltyp = ttk.Combobox(TOP,values=shelltyp_list, state='readonly')
+    shelltyp.grid(column=2,row=6)
+
+    scfmaxiter_ti = ttk.Label(TOP, text="Max Iterations for SCF:")
+    scfmaxiter_ti.grid(column=3,row=6)
+
+    scfmaxiter_var = StringVar()
+    scfmaxiter = ttk.Entry(TOP, width=5, textvariable=scfmaxiter_var)
+    scfmaxiter.grid(column=4,row=6)
+
+
+    tol_ti = ttk.Label(TOP, text="Tolerance")
+    tol_ti.grid(column=1, row=7)
+    
+    tol_var = StringVar()
+    tol = ttk.Entry(TOP, width=10, textvariable=tol_var)
+    tol.grid(column=2,row=7)
+    
+    guess_ti = ttk.Label(TOP, text="Guess")
+    guess_ti.grid(column=3,row=7)
+
+    guess_list=('TB','CORE','Fermi')
+    guess = ttk.Combobox(TOP, values=guess_list)
+    guess.grid(column=4,row=7)
+
+    calctyp_ti = ttk.Label(TOP, text="Calculation type:")
+    calctyp_ti.grid(column=1,row=8)
+
+    calc_var = StringVar()
+    singpnterg = ttk.Radiobutton(TOP, text="Single Point Energy", variable=calc_var, value="SPE")
+    optimize = ttk.Radiobutton(TOP, text="OPTIMIZATION", variable=calc_var, value="OPT")
+    singpnterg.grid(column=2, row=8)
+    optimize.grid(column=3, row=8)
+
+    freq_var = StringVar()
+    freq = ttk.Checkbutton(TOP, text="Frequency Analysis", variable=freq_var, onvalue='on', offvalue='off')
+    freq.grid(column=4,row=8)
+    
+    geometry_ti = ttk.Label(TOP, text="Input Geometry file name:")
+    geometry_ti.grid(column=1,row=9)
+
+    geometry_var = StringVar()
+    geometry = ttk.Entry(TOP, textvariable=geometry_var)
+    geometry.grid(column=2,row=9)
+
+    thermo_var = StringVar()
+    thermo = ttk.Checkbutton(TOP, text="Thermo calculation",variable=thermo_var, onvalue='on', offvalue='off')
+    thermo.grid(column=4,row=9)
+
+    multiplicity_ti = ttk.Label(TOP, text="Multiplicity")
+    multiplicity_ti.grid(column=1,row=10)
+
+    multiplicity_var = StringVar()
+    multiplicity = ttk.Entry(TOP, width=5,textvariable=multiplicity_var)
+    multiplicity.grid(column=2,row=10)
+
+    charge_ti = ttk.Label(TOP, text="Charge")
+    charge_ti.grid(column=3,row=10)
+    
+    charge_var = StringVar()
+    charge = ttk.Entry(TOP, width=5,textvariable=charge_var)
+    charge.grid(column=4,row=10)
+
+
+    create = ttk.Button(TOP, text="Create Input", command=donothing)
+    create.grid(column=4, row=20)
     cancel = ttk.Button(TOP, text="Cancel", command=TOP.destroy)
-    cancel.grid(column=4, row=10)
+    cancel.grid(column=5, row=20)
 
 
 def file_save():

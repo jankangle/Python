@@ -19,6 +19,7 @@ def updatevalue(evt):
         widget.configure(values =vals + (txt, ))
     
     return 'break'
+
 def newinp():
     TOP = Toplevel()
     TOP.title('New deMon2k Input')
@@ -33,36 +34,42 @@ def newinp():
     file_name.grid(column=2, row=1, stick=(W, E))
 
     ti = ttk.Label(TOP, text="Title:")
-    ti.grid(column=1, row=2)
+    ti.grid(column=3, row=1)
 
     title_var = StringVar()
     title = ttk.Entry(TOP, width=20, textvariable=title_var)
-    title.grid(column=2, row=2, stick=(W, E))
+    title.grid(column=4, row=1, stick=(W, E))
 
     vxctyp_var = StringVar()
     auxis = ttk.Radiobutton(TOP, text="Auxis", variable=vxctyp_var, value="AUXIS")
     basis = ttk.Radiobutton(TOP, text="Basis", variable=vxctyp_var, value="BASIS")
-    auxis.grid(column=3, row=3)
-    basis.grid(column=2, row=3)
+    auxis.grid(column=3, row=2)
+    basis.grid(column=2, row=2)
     
     vxctyp_ti = ttk.Label(TOP, text="VXCTYP")
-    vxctyp_ti.grid(column=1, row=3)
+    vxctyp_ti.grid(column=1, row=2)
 
-    functionalX_ti = ttk.Label(TOP, text="Exchange Functional")
-    functionalX_ti.grid(column=1,row=4)
+    functional = ttk.Label(TOP, text="XC Functional")
+    functional.grid(column=5,row=2)
+
+    functional_list =('B3LYP', 'BLYP', 'PBE', 'PBE0', 'PW91')
+    functional = ttk.Combobox(TOP, values=functional_list)
+    functional.grid(column=6,row=2)
+    #functionalX_ti = ttk.Label(TOP, text="Exchange Functional")
+    #functionalX_ti.grid(column=1,row=4)
     
-    functionalX_list=('PW86','B88','PW91','PBE96','TPSS')
-    functionalX = ttk.Combobox(TOP, values=functionalX_list)
-    functionalX.bind('<Return>', updatevalue)
-    functionalX.grid(column=2,row=4)
+    #functionalX_list=('PW86','B88','PW91','PBE96','TPSS')
+    #functionalX = ttk.Combobox(TOP, values=functionalX_list)
+    #functionalX.bind('<Return>', updatevalue)
+    #functionalX.grid(column=2,row=4)
 
-    functionalC_ti = ttk.Label(TOP, text="Correlation Functional")
-    functionalC_ti.grid(column=3,row=4)
+    #functionalC_ti = ttk.Label(TOP, text="Correlation Functional")
+    #functionalC_ti.grid(column=3,row=4)
 
-    functionalC_list=('VWN',"PW92","LYP","PW91","PBE","TPSS")
-    functionalC = ttk.Combobox(TOP, values=functionalC_list)
-    functionalC.bind('<Return>', updatevalue)
-    functionalC.grid(column=4,row=4)
+    #functionalC_list=('VWN',"PW92","LYP","PW91","PBE","TPSS")
+    #functionalC = ttk.Combobox(TOP, values=functionalC_list)
+    #functionalC.bind('<Return>', updatevalue)
+    #functionalC.grid(column=4,row=4)
 
     basis_set_ti = ttk.Label(TOP, text="Basis Set")
     basis_set_ti.grid(column=1,row=5)
@@ -79,6 +86,14 @@ def newinp():
     auxis_set = ttk.Combobox(TOP, values=auxis_set_list)
     auxis_set.bind('<Return>', updatevalue)
     auxis_set.grid(column=4,row=5)
+
+    ecp_ti = ttk.Label(TOP, text="ECP")
+    ecp_ti.grid(column=5,row=5)
+
+    ecp_list=('NONE','ECP|SD','RECP|SD','QECP|SD')
+    ecp = ttk.Combobox(TOP, values= ecp_list)
+    ecp.bind('<Return>', updatevalue)
+    ecp.grid(column=6,row=5)
 
     shelltyp_ti = ttk.Label(TOP, text="Shell type:")
     shelltyp_ti.grid(column=1,row=6)
@@ -103,56 +118,109 @@ def newinp():
     tol.grid(column=2,row=7)
     
     guess_ti = ttk.Label(TOP, text="Guess")
-    guess_ti.grid(column=3,row=7)
+    guess_ti.grid(column=5,row=6)
 
     guess_list=('TB','CORE','Fermi')
     guess = ttk.Combobox(TOP, values=guess_list)
-    guess.grid(column=4,row=7)
+    guess.grid(column=6,row=6)
 
     calctyp_ti = ttk.Label(TOP, text="Calculation type:")
-    calctyp_ti.grid(column=1,row=8)
+    calctyp_ti.grid(column=1,row=9)
 
     calc_var = StringVar()
     singpnterg = ttk.Radiobutton(TOP, text="Single Point Energy", variable=calc_var, value="SPE")
     optimize = ttk.Radiobutton(TOP, text="OPTIMIZATION", variable=calc_var, value="OPT")
-    singpnterg.grid(column=2, row=8)
-    optimize.grid(column=3, row=8)
+    singpnterg.grid(column=2, row=9)
+    optimize.grid(column=3, row=9)
 
     freq_var = StringVar()
     freq = ttk.Checkbutton(TOP, text="Frequency Analysis", variable=freq_var, onvalue='on', offvalue='off')
-    freq.grid(column=4,row=8)
+    freq.grid(column=4,row=9)
     
     geometry_ti = ttk.Label(TOP, text="Input Geometry file name:")
-    geometry_ti.grid(column=1,row=9)
+    geometry_ti.grid(column=1,row=10)
 
     geometry_var = StringVar()
     geometry = ttk.Entry(TOP, textvariable=geometry_var)
-    geometry.grid(column=2,row=9)
+    geometry.grid(column=2,row=10)
 
     thermo_var = StringVar()
     thermo = ttk.Checkbutton(TOP, text="Thermo calculation",variable=thermo_var, onvalue='on', offvalue='off')
-    thermo.grid(column=4,row=9)
+    thermo.grid(column=5,row=9)
 
     multiplicity_ti = ttk.Label(TOP, text="Multiplicity")
-    multiplicity_ti.grid(column=1,row=10)
+    multiplicity_ti.grid(column=3,row=7)
 
     multiplicity_var = StringVar()
     multiplicity = ttk.Entry(TOP, width=5,textvariable=multiplicity_var)
-    multiplicity.grid(column=2,row=10)
+    multiplicity.grid(column=4,row=7)
 
     charge_ti = ttk.Label(TOP, text="Charge")
-    charge_ti.grid(column=3,row=10)
+    charge_ti.grid(column=5,row=7)
     
     charge_var = StringVar()
     charge = ttk.Entry(TOP, width=5,textvariable=charge_var)
-    charge.grid(column=4,row=10)
+    charge.grid(column=6,row=7)
 
 
-    create = ttk.Button(TOP, text="Create Input", command=donothing)
-    create.grid(column=4, row=20)
+    tight_var = StringVar()
+    tight = ttk.Checkbutton(TOP, text="Tighten", variable=tight_var, onvalue='on', offvalue='off')
+    tight.grid(column=5,row=8)
+    
+    shift_ti = ttk.Label(TOP, text="Shift")
+    shift_ti.grid(column=1,row=8)
+
+    shift_var = StringVar()
+    shift = ttk.Entry(TOP, textvariable=shift_var)
+    shift.grid(column=2,row=8)
+
+    grid_ti = ttk.Label(TOP, text="Grid")
+    grid_ti.grid(column=3,row=8)
+
+    grid_list =('medium','coarse','fine')
+    grid = ttk.Combobox(TOP, values=grid_list)
+    grid.grid(column=4,row=8)
+
+    diis_var = StringVar()
+    diis = ttk.Checkbutton(TOP, text="DIIS", variable=diis_var, onvalue='on', offvalue='off')
+    diis.grid(column=6,row=8)
+
+    optgeom_ti = ttk.Label(TOP, text="Geometry for OPT")
+    optgeom_ti.grid(column=3, row=10)
+    
+    optgeom_list=('Redundant','Cartesian','Z-matrix')
+    optgeom = ttk.Combobox(TOP, values=optgeom_list)
+    optgeom.grid(column=4, row=10)
+
+    geomdis_ti = ttk.Label(TOP, text="Geometry Coordinates:")
+    geomdis_ti.grid(column=1,row=11)
+    
+    geomdis_var = StringVar()
+    ang = ttk.Radiobutton(TOP, text="Angstrom", variable=vxctyp_var, value="Angstrom")
+    bohr = ttk.Radiobutton(TOP, text="Bohr", variable=vxctyp_var, value="Bohr")
+    ang.grid(column=3, row=11)
+    bohr.grid(column=2, row=11)
+
+    geomtyp_ti = ttk.Label(TOP, text="Geometry type:")
+    geomtyp_ti.grid(column=4, row=11)
+    
+    geomtyp_var = StringVar()
+    cart = ttk.Radiobutton(TOP, text="Cartesian", variable=geomtyp_var, value="Cartesian")
+    zmtx = ttk.Radiobutton(TOP, text="Z-matrix", variable=geomtyp_var, value="Z-matrix")
+    cart.grid(column=5,row=11)
+    zmtx.grid(column=6,row=11)
+
+    whitespc = ttk.Label(TOP)
+    whitespc.grid(row=12)
+
+    create = ttk.Button(TOP, text="Create Input", command=makeinp)
+    create.grid(column=3, row=20)
     cancel = ttk.Button(TOP, text="Cancel", command=TOP.destroy)
-    cancel.grid(column=5, row=20)
+    cancel.grid(column=4, row=20)
 
+def makeinp():
+    file_name_var.get()
+    print(file_name_var)
 
 def file_save():
     f = tkFileDialog.asksaveasfile(mode='w', defaultextension=".inp")
@@ -174,8 +242,8 @@ root.config(menu=menubar)
 
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_command(label="New", command=newinp)
-filemenu.add_command(label="Open", command=callback)
-filemenu.add_command(label="Save", command=file_save)
+#filemenu.add_command(label="Open", command=callback)
+#filemenu.add_command(label="Save", command=file_save)
 filemenu.add_separator()
 filemenu.add_command(label="Exit", command=root.destroy)
 menubar.add_cascade(label="File", menu=filemenu)

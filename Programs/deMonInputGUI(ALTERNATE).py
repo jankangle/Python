@@ -38,8 +38,13 @@ def updatevalue(evt):
     
     return 'break'
 
-def makeinp():
-    print("Not implemented yet!")
+#def makeinp(self):
+#    print("Not implemented yet!")
+def makeinp(self):
+    blah = self.Entry1.get()
+    print('hi')
+    print(blah)
+
 
 class Demo1:
     def __init__(self, master):
@@ -223,7 +228,7 @@ class Demo1:
 
 
         ### CREATE ###
-        self.Button1 = Buttons(self.master,"Create Input",makeinp)
+        self.Button1 = Buttons(self.master,"Create Input",makeinp(self))
         self.Button1.grid(column=3,row=20)
         self.Button2 = Buttons(self.master,"Exit",self.master.destroy)
         self.Button2.grid(column=4,row=20)
@@ -241,6 +246,7 @@ class Demo2:
         self.frame.pack()
     def close_windows(self):
         self.master.destroy()
+    
 
 def main(): 
     root = Tk()

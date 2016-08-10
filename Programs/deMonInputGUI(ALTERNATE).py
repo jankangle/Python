@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 
-
 def Labels(local,text_lbl,nwidth=10):
     label = ttk.Label(local, text=text_lbl, width=nwidth, anchor="center")
     return label
@@ -22,8 +21,8 @@ def Comboboxs(local,val,nwidth=10):
     combobox = ttk.Combobox(local, values=val, width=nwidth)
     return combobox
 
-def CheckButtons(local,text_lbl,var,onval,offval):
-    checkbuttons = ttk.Checkbutton(local, text=text_lbl, variable=var, onvalue=onval, offvalue=offval)
+def CheckButtons(local,text_lbl,var):
+    checkbuttons = ttk.Checkbutton(local, text=text_lbl, variable=var)
     return checkbuttons
 
 def updatevalue(evt):
@@ -38,219 +37,260 @@ def updatevalue(evt):
     
     return 'break'
 
-#def makeinp(self):
-#    print("Not implemented yet!")
-def makeinp(self):
-    blah = self.Entry1.get()
-    print('hi')
-    print(blah)
+
+def main_window(frame):
+
+    def getvars(*args):
+        #print("Not implemented yet!")
+        _finp = Entry1.get()
+        _title = Entry2.get()
+        _vxctyp = vxctyp_var.get()
+        _xcfunc = Combobox1.get()
+        _basis = Combobox2.get()
+        _auxis = Combobox3.get()
+        _ecp = Combobox4.get()
+        _shelltyp = Combobox5.get()
+        _scfmxiter = Entry3.get()
+        _tol = Entry4.get()
+        _guess = Combobox6.get()
+        _calctyp = calc_var.get()
+        _freq = freq_var.get()
+        _geom = Entry5.get()
+        _thermo = thermo_var.get()
+        _mult = Entry6.get()
+        _charge = Entry7.get()
+        #_tight = tight_var.get()
+        _shift = Entry8.get()
+        _grid = Combobox7.get()
+        _diis = diis_var.get()
+        _optgeom = Combobox8.get()
+        _geomdis = geomdis_var.get()
+        _geomtyp = geomtyp_var.get()
+
+        def makeinp(*args):
+            output = open(_finp, 'w')
+            output.write("TITLE"+" "+_title+"\n")
+            output.write("VXCTYP"+" "+_vxctyp+" "+_xcfunc+"\n")
+            output.write("BASIS ("+_basis+")"+"\n")
+            if _ecp != "NONE":
+                output.write("ECPS ("+_ecp+")"+"\n")
+            output.write("AUXIS ("+_auxis+")"+"\n")
+            _tight = tight_var.get()
+            if _tight == 1:
+                output.write("SCFTYP"+" "+_shelltyp+" "+"MAX="+_scfmxiter+" "+_tol+"\n")
+            elif _tight == 0:
+                _tight = "NOTIGHTEN"
+                output.write("SCFTYP"+" "+_tight+" "+_shelltyp+" "+"MAX="+_scfmxiter+" "+_tol+"\n")
+            else:
+                print("Invalid Tight setting")
+            if _shift != "0":
+                output.write("SHIFT"+" "+_shift+"\n")
+            if (_grid == "medium" or _grid == "coarse" or _grid == "fine"):
+                output.write("GRID FIXED"+" "+_grid+"\n")
+            output.write("GUESS"+" "+_guess+"\n")
+            if _diis == 0:
+                output.write("DIIS OFF")
+            output.write("MULTIPLICITY"+" "+_mult+"\n")
+            output.write("CHARGE"+" "+_charge+"\n")
+            if _calctyp == "OPT":
+                output.write("OPTIMIZATION"+" "+_optgeom+"\n")
+            if _freq == 1:
+                output.write("FREQUENCY"+"\n")
+                if _thermo == 1:
+                    output.write("THERMO"+"\n")
+            output.write("GEOMETRY"+" "+_geomtyp+" "+_geomdis+"\n")
 
 
-class Demo1:
-    def __init__(self, master):
-        self.master = master
-        self.frame = ttk.Frame(self.master)
-
-        ### FILE NAME ###
-        self.Label1 = Labels(self.master,"File name:")
-        self.Label1.grid(column=1,row=1)
-        file_name_var = StringVar()
-        self.Entry1 = Entrys(self.master,file_name_var,30)
-        self.Entry1.grid(column=2,row=1,columnspan=2)
-
-        ### TITLE ###
-        self.Label2 = Labels(self.master, "Title:")
-        self.Label2.grid(column=4,row=1)
-        title_var = StringVar()
-        self.Entry2 = Entrys(self.master,title_var,30)
-        self.Entry2.grid(column=5,row=1,columnspan=2)
-
-        ### VXCTYP ###
-        self.Label3 = Labels(self.master,"VXCTYP")
-        self.Label3.grid(column=1,row=2)
-        vxctyp_var = StringVar()
-        self.Radio1 = RadioButtons(self.master,"Auxis",vxctyp_var,"AUXIS")
-        self.Radio2 = RadioButtons(self.master,"Basis",vxctyp_var,"BASIS")
-        self.Radio1.grid(column=3,row=2)
-        self.Radio2.grid(column=2,row=2)
-
-        ### XC Functional ###
-        self.Label4 = Labels(self.master,"XC Functional:",12)
-        self.Label4.grid(column=5,row=2)
-        functional_list =('B3LYP', 'BLYP', 'PBE', 'PBE0', 'PW91')
-        self.Combobox1 = Comboboxs(self.master,functional_list)
-        self.Combobox1.grid(column=6,row=2)
-
-        ### BASIS SET ###
-        self.Label5 = Labels(self.master, "Basis set:")
-        self.Label5.grid(column=1,row=5)
-        basis_set_list=('DZVP','DZVP-GGA','TZVP','TZVP-GGA')
-        self.Combobox2 = Comboboxs(self.master,basis_set_list)
-        self.Combobox2.bind('<Return>', updatevalue)
-        self.Combobox2.grid(column=2,row=5)
-
-        ### AUXIS SET ###
-        self.Label6 = Labels(self.master, "Auxis set:")
-        self.Label6.grid(column=3,row=5)
-        auxis_set_list=('gen-a1','gen-a2','gen-a2**','gen-a3**')
-        self.Combobox3 = Comboboxs(self.master,auxis_set_list)
-        self.Combobox3.bind('<Return>', updatevalue)
-        self.Combobox3.grid(column=4,row=5)
-
-        ### ECP ###
-        self.Label7 = Labels(self.master, "ECP:")
-        self.Label7.grid(column=5,row=5)
-        ecp_list=('NONE','ECP|SD','RECP|SD','QECP|SD')
-        self.Combobox4 = Comboboxs(self.master,ecp_list)
-        self.Combobox4.bind('<Return>', updatevalue)
-        self.Combobox4.grid(column=6,row=5)
-
-        ### Shell Type ###
-        self.Label8 = Labels(self.master, "Shell type:")
-        self.Label8.grid(column=1,row=6)
-        shelltyp_list=('RKS','ROKS','UKS')
-        self.Combobox5 = Comboboxs(self.master,shelltyp_list)
-        self.Combobox5.bind('<Return>', updatevalue)
-        self.Combobox5.grid(column=2,row=6)
-
-        ### SCF MAX ITER ###
-        self.Label9 = Labels(self.master, "Max Iter for SCF:",12)
-        self.Label9.grid(column=3,row=6)
-        scfmaxiter_var = StringVar()
-        self.Entry3 = Entrys(self.master,scfmaxiter_var)
-        self.Entry3.grid(column=4,row=6)
-        
-        ### TOL ###
-        self.Label10 = Labels(self.master, "Tolerance:")
-        self.Label10.grid(column=1,row=7)
-        tol_var = StringVar()
-        self.Entry4 = Entrys(self.master,tol_var)
-        self.Entry4.grid(column=2,row=7)
-
-        ### GUESS ###
-        self.Label11 = Labels(self.master, "Guess:")
-        self.Label11.grid(column=5,row=6)
-        guess_list=('TB','CORE','Fermi')
-        self.Combobox6 = Comboboxs(self.master,guess_list)
-        self.Combobox6.bind('<Return>', updatevalue)
-        self.Combobox6.grid(column=6,row=6)
-
-        ### CALCTYP ###
-        self.Label12 = Labels(self.master, "Calculation:")
-        self.Label12.grid(column=1,row=9)
-        calc_var = StringVar()
-        self.Radio3 = RadioButtons(self.master,"Single Point Energy",calc_var, "SPE")
-        self.Radio4 = RadioButtons(self.master,"Optimization",calc_var, "OPT")
-        self.Radio3.grid(column=2,row=9)
-        self.Radio4.grid(column=3,row=9)
-        
-        ### FREQUENCY ###
-        freq_var = StringVar()
-        self.check1 = CheckButtons(self.master, "Frequency Analysis", freq_var,'on','off')
-        self.check1.grid(column=4,row=9)
-        
-        ### GEOMETRY ###
-        self.Label13 = Labels(self.master, "Input Geometry file name:",30)
-        self.Label13.grid(column=1,row=10,columnspan=2)
-        geometry_var = StringVar()
-        self.Entry5 = Entrys(self.master, geometry_var,20)
-        self.Entry5.grid(column=3,row=10,columnspan=2)
-
-        ### THERMO ###
-        thermo_var = StringVar()
-        self.check2 = CheckButtons(self.master, "Thermo Calc.",  thermo_var, 'on','off')
-        self.check2.grid(column=5,row=9)
+            #output.write()
+        makeinp()
+    ### FILE NAME ###
+    Label1 = Labels(frame,"File name:")
+    Label1.grid(column=1,row=1)
+    file_name_var = StringVar()
+    Entry1 = Entrys(frame,file_name_var,30)
+    Entry1.grid(column=2,row=1,columnspan=2)
     
-        ### MULTIPLICITY ###
-        self.Label14 = Labels(self.master, "Multiplicity:")
-        self.Label14.grid(column=3,row=7)
-        multiplicity_var = StringVar()
-        self.Entry6 = Entrys(self.master, multiplicity_var)
-        self.Entry6.grid(column=4,row=7)
-        
-        ### CHARGE ###
-        self.Label15 = Labels(self.master, "Charge:")
-        self.Label15.grid(column=5,row=7)
-        charge_var = StringVar()
-        self.Entry7 = Entrys(self.master, charge_var)
-        self.Entry7.grid(column=6,row=7)
-        
-        ### TIGHT ###
-        tight_var = StringVar()
-        self.check3 = CheckButtons(self.master, "Tighten",  tight_var, 'on','off')
-        self.check3.grid(column=5,row=8)
-        
-        ### SHIFT ###
-        self.Label16 = Labels(self.master, "Shift:")
-        self.Label16.grid(column=1,row=8)
-        shift_var = StringVar()
-        self.Entry8 = Entrys(self.master, shift_var)
-        self.Entry8.grid(column=2,row=8)
+    ### TITLE ###
+    Label2 = Labels(frame, "Title:")
+    Label2.grid(column=4,row=1)
+    title_var = StringVar()
+    Entry2 = Entrys(frame,title_var,30)
+    Entry2.grid(column=5,row=1,columnspan=2)
+    
+    ### VXCTYP ###
+    Label3 = Labels(frame,"VXCTYP")
+    Label3.grid(column=1,row=2)
+    vxctyp_var = StringVar()
+    Radio1 = RadioButtons(frame,"Auxis",vxctyp_var,"AUXIS")
+    Radio2 = RadioButtons(frame,"Basis",vxctyp_var,"BASIS")
+    Radio1.grid(column=3,row=2)
+    Radio2.grid(column=2,row=2)
+    
+    ### XC Functional ###
+    Label4 = Labels(frame,"XC Functional:",12)
+    Label4.grid(column=5,row=2)
+    functional_list =('B3LYP', 'BLYP', 'PBE', 'PBE0', 'PW91')
+    Combobox1 = Comboboxs(frame,functional_list)
+    Combobox1.bind('<Return>', updatevalue)
+    Combobox1.grid(column=6,row=2)
+    
+    ### BASIS SET ###
+    Label5 = Labels(frame, "Basis set:")
+    Label5.grid(column=1,row=5)
+    basis_set_list=('DZVP','DZVP-GGA','TZVP','TZVP-GGA')
+    Combobox2 = Comboboxs(frame,basis_set_list)
+    Combobox2.bind('<Return>', updatevalue)
+    Combobox2.grid(column=2,row=5)
+    
+    ### AUXIS SET ###
+    Label6 = Labels(frame, "Auxis set:")
+    Label6.grid(column=3,row=5)
+    auxis_set_list=('gen-a1','gen-a2','gen-a2**','gen-a3**')
+    Combobox3 = Comboboxs(frame,auxis_set_list)
+    Combobox3.bind('<Return>', updatevalue)
+    Combobox3.grid(column=4,row=5)
+    
+    ### ECP ###
+    Label7 = Labels(frame, "ECP:")
+    Label7.grid(column=5,row=5)
+    ecp_list=('NONE','ECP|SD','RECP|SD','QECP|SD')
+    Combobox4 = Comboboxs(frame,ecp_list)
+    Combobox4.bind('<Return>', updatevalue)
+    Combobox4.grid(column=6,row=5)
+    
+    ### Shell Type ###
+    Label8 = Labels(frame, "Shell type:")
+    Label8.grid(column=1,row=6)
+    shelltyp_list=('RKS','ROKS','UKS')
+    Combobox5 = Comboboxs(frame,shelltyp_list)
+    Combobox5.bind('<Return>', updatevalue)
+    Combobox5.grid(column=2,row=6)
+    
+    ### SCF MAX ITER ###
+    Label9 = Labels(frame, "Max Iter for SCF:",12)
+    Label9.grid(column=3,row=6)
+    scfmaxiter_var = StringVar()
+    Entry3 = Entrys(frame,scfmaxiter_var)
+    Entry3.grid(column=4,row=6)
+    
+    ### TOL ###
+    Label10 = Labels(frame, "Tolerance:")
+    Label10.grid(column=1,row=7)
+    tol_var = StringVar()
+    Entry4 = Entrys(frame,tol_var)
+    Entry4.grid(column=2,row=7)
+    
+    ### GUESS ###
+    Label11 = Labels(frame, "Guess:")
+    Label11.grid(column=5,row=6)
+    guess_list=('TB','CORE','Fermi')
+    Combobox6 = Comboboxs(frame,guess_list)
+    Combobox6.bind('<Return>', updatevalue)
+    Combobox6.grid(column=6,row=6)
+    
+    ### CALCTYP ###
+    Label12 = Labels(frame, "Calculation:")
+    Label12.grid(column=1,row=9)
+    calc_var = StringVar()
+    Radio3 = RadioButtons(frame,"Single Point Energy",calc_var, "SPE")
+    Radio4 = RadioButtons(frame,"Optimization",calc_var, "OPT")
+    Radio3.grid(column=2,row=9)
+    Radio4.grid(column=3,row=9)
+    
+    ### FREQUENCY ###
+    freq_var = IntVar()
+    check1 = CheckButtons(frame, "Frequency Analysis", freq_var)
+    check1.grid(column=4,row=9)
+    
+    ### GEOMETRY ###
+    Label13 = Labels(frame, "Input Geometry file name:",30)
+    Label13.grid(column=1,row=10,columnspan=2)
+    geometry_var = StringVar()
+    Entry5 = Entrys(frame, geometry_var,20)
+    Entry5.grid(column=3,row=10,columnspan=2)
+    
+    ### THERMO ###
+    thermo_var = StringVar()
+    check2 = CheckButtons(frame, "Thermo Calc.",  thermo_var)
+    check2.grid(column=5,row=9)
+    
+    ### MULTIPLICITY ###
+    Label14 = Labels(frame, "Multiplicity:")
+    Label14.grid(column=3,row=7)
+    multiplicity_var = StringVar()
+    Entry6 = Entrys(frame, multiplicity_var)
+    Entry6.grid(column=4,row=7)
+    
+    ### CHARGE ###
+    Label15 = Labels(frame, "Charge:")
+    Label15.grid(column=5,row=7)
+    charge_var = StringVar()
+    Entry7 = Entrys(frame, charge_var)
+    Entry7.grid(column=6,row=7)
+    
+    ### TIGHT ###
+    tight_var = IntVar()
+    check3 = CheckButtons(frame, "Tighten",  tight_var)
+    check3.grid(column=5,row=8)
+    
+    ### SHIFT ###
+    Label16 = Labels(frame, "Shift:")
+    Label16.grid(column=1,row=8)
+    shift_var = StringVar()
+    Entry8 = Entrys(frame, shift_var)
+    Entry8.grid(column=2,row=8)
+    
+    ### GRID ###
+    Label17 = Labels(frame, "Grid:")
+    Label17.grid(column=3,row=8)
+    grid_list =('do not fix','MEDIUM','COARSE','FINE')
+    Combobox7 = Comboboxs(frame,grid_list)
+    Combobox7.bind('<Return>', updatevalue)
+    Combobox7.grid(column=4,row=8)
 
-        ### GRID ###
-        self.Label17 = Labels(self.master, "Grid:")
-        self.Label17.grid(column=3,row=8)
-        grid_list =('medium','coarse','fine')
-        self.Combobox7 = Comboboxs(self.master,grid_list)
-        self.Combobox7.bind('<Return>', updatevalue)
-        self.Combobox7.grid(column=4,row=8)
-
-        ### DIIS ###
-        diis_var = StringVar()
-        self.check4 = CheckButtons(self.master, "DIIS", diis_var, 'on','off')
-        self.check4.grid(column=6,row=8)
-        
-        ### OPTGEOM ###
-        self.Label18 = Labels(self.master, "Geometry for OPT:",14)
-        self.Label18.grid(column=5,row=10)
-        optgeom_list=('Redundant','Cartesian','Z-matrix')
-        self.Combobox8 = Comboboxs(self.master, optgeom_list)
-        self.Combobox8.bind('<Return>', updatevalue)
-        self.Combobox8.grid(column=6,row=10)
-        
-        ### GEOMDIS ###
-        self.Label19 = Labels(self.master, "Geometry Coords.",15)
-        self.Label19.grid(column=1,row=11)
-        geomdis_var = StringVar()
-        self.Radio5 = RadioButtons(self.master, "Angstrom", geomdis_var, "Angstrom")
-        self.Radio6 = RadioButtons(self.master, "Bohr", geomdis_var, "Bohr")
-        self.Radio5.grid(column=3,row=11)
-        self.Radio6.grid(column=2,row=11)
-        
-        ### GEOMTYP ###
-        self.Label20 = Labels(self.master, "Geometry Type:",12)
-        self.Label20.grid(column=4,row=11)
-        geomtyp_var = StringVar()
-        self.Radio7 = RadioButtons(self.master,"Cartesian",geomtyp_var,"Cartesian")
-        self.Radio8 = RadioButtons(self.master,"Z-Matrix",geomtyp_var,"Z-Matrix")
-        self.Radio7.grid(column=5,row=11)
-        self.Radio8.grid(column=6,row=11)
-
-
-        ### CREATE ###
-        self.Button1 = Buttons(self.master,"Create Input",makeinp(self))
-        self.Button1.grid(column=3,row=20)
-        self.Button2 = Buttons(self.master,"Exit",self.master.destroy)
-        self.Button2.grid(column=4,row=20)
-
-    def new_window(self):
-        self.newWindow = ttk.Toplevel(self.master)
-        self.app = Demo2(self.newWindow)
-
-class Demo2:
-    def __init__(self, master):
-        self.master = master
-        self.frame = ttk.Frame(self.master)
-        self.quitButton = ttk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
-        self.quitButton.pack()
-        self.frame.pack()
-    def close_windows(self):
-        self.master.destroy()
+    ### DIIS ###
+    diis_var = StringVar()
+    check4 = CheckButtons(frame, "DIIS", diis_var)
+    check4.grid(column=6,row=8)
+    
+    ### OPTGEOM ###
+    Label18 = Labels(frame, "Geometry for OPT:",14)
+    Label18.grid(column=5,row=10)
+    optgeom_list=('REDUNDANT','CARTESIAN','INTERNAL')
+    Combobox8 = Comboboxs(frame, optgeom_list)
+    Combobox8.bind('<Return>', updatevalue)
+    Combobox8.grid(column=6,row=10)
+    
+    ### GEOMDIS ###
+    Label19 = Labels(frame, "Geometry Coords.",15)
+    Label19.grid(column=1,row=11)
+    geomdis_var = StringVar()
+    Radio5 = RadioButtons(frame, "Angstrom", geomdis_var, "ANGSTROM")
+    Radio6 = RadioButtons(frame, "Bohr", geomdis_var, "BOHR")
+    Radio5.grid(column=3,row=11)
+    Radio6.grid(column=2,row=11)
+    
+    ### GEOMTYP ###
+    Label20 = Labels(frame, "Geometry Type:",12)
+    Label20.grid(column=4,row=11)
+    geomtyp_var = StringVar()
+    Radio7 = RadioButtons(frame,"Cartesian",geomtyp_var,"CARTESIAN")
+    Radio8 = RadioButtons(frame,"Z-Matrix",geomtyp_var,"ZMATRIX")
+    Radio7.grid(column=5,row=11)
+    Radio8.grid(column=6,row=11)
+    
+    
+    ### CREATE ###
+    Button1 = Buttons(frame,"Create Input",getvars)
+    Button1.grid(column=3,row=20)
+    Button2 = Buttons(frame,"Exit",frame.destroy)
+    Button2.grid(column=4,row=20)
     
 
 def main(): 
     root = Tk()
-    app = Demo1(root)
+    frame = ttk.Frame(root)
+    app1 = main_window(root)
     root.mainloop()
 
 if __name__ == '__main__':

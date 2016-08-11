@@ -227,29 +227,29 @@ def main_window(frame):
     
     ### CALCTYP ###
     Label12 = Labels(frame, "Calculation:")
-    Label12.grid(column=1,row=9)
+    Label12.grid(column=1,row=10)
     calc_var = StringVar()
     Radio3 = RadioButtons(frame,"Single Point Energy",calc_var, "SPE")
     Radio4 = RadioButtons(frame,"Optimization",calc_var, "OPT")
-    Radio3.grid(column=2,row=9)
-    Radio4.grid(column=3,row=9)
+    Radio3.grid(column=2,row=10)
+    Radio4.grid(column=3,row=10)
     
     ### FREQUENCY ###
     freq_var = IntVar()
     check1 = CheckButtons(frame, "Frequency Analysis", freq_var)
-    check1.grid(column=4,row=9)
+    check1.grid(column=4,row=10)
     
     ### GEOMETRY ###
     Label13 = Labels(frame, "Input Geometry file name:",30)
-    Label13.grid(column=1,row=10,columnspan=2)
+    Label13.grid(column=1,row=12,columnspan=2)
     geometry_var = StringVar()
     Entry5 = Entrys(frame, geometry_var,20)
-    Entry5.grid(column=3,row=10,columnspan=2)
+    Entry5.grid(column=3,row=12,columnspan=2)
     
     ### THERMO ###
     thermo_var = StringVar()
     check2 = CheckButtons(frame, "Thermo Calc.",  thermo_var)
-    check2.grid(column=5,row=9)
+    check2.grid(column=5,row=10)
     
     ### MULTIPLICITY ###
     Label14 = Labels(frame, "Multiplicity:")
@@ -292,29 +292,29 @@ def main_window(frame):
     
     ### OPTGEOM ###
     Label18 = Labels(frame, "Geometry for OPT:",14)
-    Label18.grid(column=5,row=10)
+    Label18.grid(column=5,row=12)
     optgeom_list=('REDUNDANT','CARTESIAN','INTERNAL')
-    Combobox8 = Comboboxs(frame, optgeom_list)
+    Combobox8 = Comboboxs(frame, optgeom_list,15)
     Combobox8.bind('<Return>', updatevalue)
-    Combobox8.grid(column=6,row=10)
+    Combobox8.grid(column=6,row=12)
     
     ### GEOMDIS ###
-    Label19 = Labels(frame, "Geometry Coords.",15)
-    Label19.grid(column=1,row=11)
+    Label19 = Labels(frame, "Geometry Coordinates:",18)
+    Label19.grid(column=1,row=13)
     geomdis_var = StringVar()
     Radio5 = RadioButtons(frame, "Angstrom", geomdis_var, "ANGSTROM")
     Radio6 = RadioButtons(frame, "Bohr", geomdis_var, "BOHR")
-    Radio5.grid(column=3,row=11)
-    Radio6.grid(column=2,row=11)
+    Radio5.grid(column=3,row=13)
+    Radio6.grid(column=2,row=13)
     
     ### GEOMTYP ###
     Label20 = Labels(frame, "Geometry Type:",12)
-    Label20.grid(column=4,row=11)
+    Label20.grid(column=4,row=13)
     geomtyp_var = StringVar()
     Radio7 = RadioButtons(frame,"Cartesian",geomtyp_var,"CARTESIAN")
     Radio8 = RadioButtons(frame,"Z-Matrix",geomtyp_var,"ZMATRIX")
-    Radio7.grid(column=5,row=11)
-    Radio8.grid(column=6,row=11)
+    Radio7.grid(column=5,row=13)
+    Radio8.grid(column=6,row=13)
     
     
     ### CREATE/Exit ###
@@ -322,7 +322,14 @@ def main_window(frame):
     Button1.grid(column=3,row=20)
     Button2 = Buttons(frame,"Exit",frame.destroy)
     Button2.grid(column=4,row=20)
-    
+ 
+    ### Separators ###
+    s1 = ttk.Separator(frame, orient=HORIZONTAL)
+    s1.grid(row=14,columnspan=7, stick="ew",pady=2)
+    s2 = ttk.Separator(frame, orient=HORIZONTAL)
+    s2.grid(row=11,columnspan=7, stick="ew",pady=2)
+    s3 = ttk.Separator(frame, orient=HORIZONTAL)
+    s3.grid(row=9,columnspan=7, stick="ew",pady=2)
 ### Initialize window ###
 def main(): 
     root = Tk()

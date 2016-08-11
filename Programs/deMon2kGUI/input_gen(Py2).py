@@ -101,10 +101,10 @@ def main_window(frame):
             output.write("AUXIS ("+_auxis+")"+"\n")
             _tight = tight_var.get()
             if _tight == 1:
-                output.write("SCFTYP"+" "+_shelltyp+" "+"MAX="+_scfmxiter+" "+_tol+"\n")
+                output.write("SCFTYP"+" "+_shelltyp+" "+"MAX="+_scfmxiter+" "+"TOL="+_tol+"\n")
             elif _tight == 0:
                 _tight = "NOTIGHTEN"
-                output.write("SCFTYP"+" "+_tight+" "+_shelltyp+" "+"MAX="+_scfmxiter+" "+_tol+"\n")
+                output.write("SCFTYP"+" "+_tight+" "+_shelltyp+" "+"MAX="+_scfmxiter+" "+"TOL="+_tol+"\n")
             else:
                 print("Invalid Tight setting")
             if _shift != "0":

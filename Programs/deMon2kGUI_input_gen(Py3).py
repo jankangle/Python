@@ -195,8 +195,8 @@ def main_window(frame):
     Combobox4.bind('<Return>', updatevalue)
     Combobox4.grid(column=6,row=5)
     
-    ### Shell Type ###
-    Label8 = Labels(frame, "Shell type:")
+    ### KS Shell Type ###
+    Label8 = Labels(frame, "KS type:")
     Label8.grid(column=1,row=6)
     shelltyp_list=('RKS','ROKS','UKS')
     Combobox5 = Comboboxs(frame,shelltyp_list)

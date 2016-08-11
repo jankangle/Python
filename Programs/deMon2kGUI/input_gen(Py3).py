@@ -334,6 +334,7 @@ def main_window(frame):
 def main(): 
     root = Tk()
     frame = ttk.Frame(root)
+    root.title('deMon2k Input Generator')
     app1 = main_window(root)
     root.mainloop()
 

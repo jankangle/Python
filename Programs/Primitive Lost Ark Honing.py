@@ -12,7 +12,7 @@ def print2darray(arr):
         for j in i:
             print(j, end=" ")
         print()
-NumofIterations = 500000
+NumofIterations = 100000
 
 ### COST ###
 #UPDATE THESE
@@ -41,14 +41,6 @@ SolarBlessingBenefit = 0.03333
 MaxSolarProtection = 2
 SolarProtectionBenefit = 0.1
 
-
-
-#Help Usage
-UsedSolarGrace = 0
-UsedSolarBlessing = 0
-UsedSolarProtection = 0
-
-
 ### ARRAY DECLARATIONS ###
 Attempts = []
 AttemptsforAVG = []
@@ -73,16 +65,16 @@ else:
 #MaxHelp = MaxSolarGrace
 for y in range(0, MaxHelp+1):
     for x in range(1, NumofIterations):
+        UsedSolarGrace = 0
+        UsedSolarBlessing = 0
+        UsedSolarProtection = 0
         if UserHelp == "G":
             UsedSolarGrace = y
         elif UserHelp == "B":
             UsedSolarBlessing = y
         elif UserHelp == "P":
             UsedSolarProtection = y
-        elif UserHelp == "N":
-            UsedSolarGrace = 0
-            UsedSolarBlessing = 0
-            UsedSolarProtection = 0
+
         TotalHelp = (SolarGraceBenefit * UsedSolarGrace) + (SolarBlessingBenefit * UsedSolarBlessing) + (SolarProtectionBenefit * UsedSolarProtection)
         HelpCost = (UsedSolarGrace * SolarGraceCost) + (UsedSolarBlessing * SolarBlessingCost) + (UsedSolarProtection * SolarProtectionCost)
         passfail = False

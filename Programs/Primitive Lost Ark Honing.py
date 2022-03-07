@@ -62,7 +62,6 @@ else:
     exit()
 
 
-#MaxHelp = MaxSolarGrace
 for y in range(0, MaxHelp+1):
     for x in range(1, NumofIterations):
         UsedSolarGrace = 0

@@ -18,11 +18,11 @@ NumofIterations = 100000
 
 ### COST ###
 #UPDATE THESE
-DestructionStonesCost = 68 / 10     # Destruction Stone Crystals
-HonorLeapStonesCost = 161           # Honor Leapstones
-SolarGraceCost = 35                 # Solar Grace
-SolarBlessingCost = 86.33           # Solar Blessing
-SolarProtectionCost = 431.6667      # Solar Protection
+DestructionStonesCost = 93 / 10     # Destruction Stone Crystals
+HonorLeapStonesCost = 168           # Honor Leapstones
+SolarGraceCost = 60                 # Solar Grace
+SolarBlessingCost = 245           # Solar Blessing
+SolarProtectionCost = 560      # Solar Protection
 
 HoneLVL = int(input("Enter Weapon Hone LVL Target: "))
 if HoneLVL == 7:

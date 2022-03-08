@@ -15,6 +15,7 @@ def print2darray(arr):
         print()
 NumofIterations = 100000
 
+
 ### COST ###
 #UPDATE THESE
 DestructionStonesCost = 68 / 10     # Destruction Stone Crystals
@@ -24,10 +25,17 @@ SolarBlessingCost = 86.33           # Solar Blessing
 SolarProtectionCost = 431.6667      # Solar Protection
 
 #LVL 6 -> LVL7
-ChanceToHone = 0.6
-NumOfDestructionStones = 250
-NumOfHonorLeapStones = 8
-PityChance = ChanceToHone * 0.1
+HoneLVL = input("Enter Weapon Hone LVL Target")
+if HoneLVL == 7:
+    ChanceToHone = 0.60
+    NumOfDestructionStones = 250
+    NumOfHonorLeapStones = 8
+    PityChance = ChanceToHone * 0.1
+elif HoneLVL == 8:
+    ChanceToHone = 0.60
+    NumOfDestructionStones = 250
+    NumOfHonorLeapStones = 8
+    PityChance = ChanceToHone * 0.1    
 
 ### HELP ITEMS ###
 #Solar Grace
@@ -81,27 +89,27 @@ for y in range(0, MaxHelp+1):
         NumofAttempts = 0
         TotalCost = DestructionStonesCost * NumOfDestructionStones + HonorLeapStonesCost * NumOfHonorLeapStones + HelpCost
         ArtisanEnergy = 0
-    
+        PityChance = 0
         while passfail == False:
             NumofAttempts += 1
 
             if (NumofAttempts > 1):
-                if random.random() >= ChanceToHone + ArtisanEnergy + TotalHelp + PityChance:
+                if random.random() >= ChanceToHone + TotalHelp + PityChance:
                     ArtisanEnergy += (ChanceToHone + (SolarGraceBenefit * UsedSolarGrace + PityChance) *0.465)
                                    
                     if ArtisanEnergy >= 1:
-                        print("pity")
-                        break
+                        #print("pity")
+                        passfail = True
                 else:
                     passfail = True
 
             else:
                 
-                if random.random() >= ChanceToHone + ArtisanEnergy + TotalHelp:
-                    ArtisanEnergy += (ChanceToHone + (SolarGraceBenefit * UsedSolarGrace) *0.465)
+                if random.random() >= ChanceToHone + TotalHelp:
+                    ArtisanEnergy += (ChanceToHone + (SolarGraceBenefit * UsedSolarGrace)) * 0.465
                                    
                     if ArtisanEnergy >= 1:
-                        break
+                        passfail = True
                 else:
                     passfail = True
 

@@ -1,7 +1,6 @@
 #PYTHON TIME
-from pydoc import doc
 import random
-
+import timeit
 def _sum(arr):
     sum =0
     for i in arr:
@@ -13,7 +12,9 @@ def print2darray(arr):
         for j in i:
             print(j, end=" ")
         print()
-NumofIterations = 100000
+
+
+NumofIterations = 1000000
 
 
 ### COST ###
@@ -120,7 +121,9 @@ elif UserHelp == "N":
 else:
     exit()
 
-for z in range(0, 5):
+start = timeit.default_timer()
+print("Cost", "\t\tHelp Used", "\tArtisan Energy")
+for z in range(0, 8):
     nut = False
     Attempts = []
     AttemptsforAVG = []
@@ -151,6 +154,8 @@ for z in range(0, 5):
         PotentialArtisan = (ChanceToHone + (UsedBenefit * y) + TotalPityChance) * 0.465
         if ArtisanEnergy + PotentialArtisan >= 1:
             MaxMaxHelp = y
+        elif ArtisanEnergy >= 1 and nut == True:
+            MaxMaxHelp = y - 1
         for x in range(1, NumofIterations):
             TotalHelp = (SolarGraceBenefit * UsedSolarGrace) + (SolarBlessingBenefit * UsedSolarBlessing) + (SolarProtectionBenefit * UsedSolarProtection)
             HelpCost = (UsedSolarGrace * SolarGraceCost) + (UsedSolarBlessing * SolarBlessingCost) + (UsedSolarProtection * SolarProtectionCost)
@@ -216,13 +221,15 @@ for z in range(0, 5):
         AttemptsforAVG.append(_sum(Attempts) / len(Attempts))
         if ArtisanEnergy >= 1:
             nut = True
-            break
+            #break
     LowestCost.append(SolarHelp.index(min(SolarHelp)))
-    if nut == True:
-        break
+
     #print("Solar Help", "\tAverage Cost", "\tAverage Number of Attempts")
     #for i in SolarHelp:
     #    print(SolarHelp.index(i), "\t \t" , "%.2f"  %i, "\t" , "%.3f" %AttemptsforAVG[SolarHelp.index(i)])
 
-    print( "%.2f" % min(SolarHelp), "\t",SolarHelp.index(min(SolarHelp)))#, "\t", "%.3f" % ArtisanEnergy)
-
+    print( "%.2f" % min(SolarHelp), "\t",SolarHelp.index(min(SolarHelp)), "\t\t%.3f" % ArtisanEnergy)#, "\t", "%.3f" % ArtisanEnergy)
+    if nut == True:
+        break
+stop = timeit.default_timer()
+print('Program Run Time: ', "%.2f"  % (stop - start), "seconds")

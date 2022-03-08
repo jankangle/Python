@@ -25,36 +25,71 @@ SolarBlessingCost = 86.33           # Solar Blessing
 SolarProtectionCost = 431.6667      # Solar Protection
 
 #LVL 6 -> LVL7
-HoneLVL = input("Enter Weapon Hone LVL Target")
+HoneLVL = int(input("Enter Weapon Hone LVL Target: "))
 if HoneLVL == 7:
     ChanceToHone = 0.60
     NumOfDestructionStones = 250
     NumOfHonorLeapStones = 8
-    PityChance = ChanceToHone * 0.1
+    SolarGraceBenefit = 0.0167
+    SolarBlessingBenefit = 0.03333
+    SolarProtectionBenefit = 0.1
 elif HoneLVL == 8:
-    ChanceToHone = 0.60
-    NumOfDestructionStones = 250
+    ChanceToHone = 0.45
+    NumOfDestructionStones = 258
     NumOfHonorLeapStones = 8
-    PityChance = ChanceToHone * 0.1    
+    SolarGraceBenefit = 0.0125
+    SolarBlessingBenefit = 0.025
+    SolarProtectionBenefit = 0.075
+elif HoneLVL == 9:
+    ChanceToHone = 0.30
+    NumOfDestructionStones = 258
+    NumOfHonorLeapStones = 8 
+    SolarGraceBenefit = 0.0084
+    SolarBlessingBenefit = 0.0167
+    SolarProtectionBenefit = 0.05
+elif HoneLVL == 10:
+    ChanceToHone = 0.30
+    NumOfDestructionStones = 320
+    NumOfHonorLeapStones = 10
+    SolarGraceBenefit = 0.0084
+    SolarBlessingBenefit = 0.0167
+    SolarProtectionBenefit = 0.05
+elif HoneLVL == 11:
+    ChanceToHone = 0.30
+    NumOfDestructionStones = 320
+    NumOfHonorLeapStones = 10
+elif HoneLVL == 12:
+    ChanceToHone = 0.30
+    NumOfDestructionStones = 320
+    NumOfHonorLeapStones = 10
+elif HoneLVL == 13:
+    ChanceToHone = 0.15
+    NumOfDestructionStones = 380
+    NumOfHonorLeapStones = 10
+elif HoneLVL == 14:
+    ChanceToHone = 0.15
+    NumOfDestructionStones = 380
+    NumOfHonorLeapStones = 12
+elif HoneLVL == 15:
+    ChanceToHone = 0.1
+    NumOfDestructionStones = 380
+    NumOfHonorLeapStones = 12
+else:
+    print("Wrong")
+    exit()  
 
-### HELP ITEMS ###
-#Solar Grace
+PityChance = ChanceToHone * 0.1
+### MAX HELP ITEMS ###
 MaxSolarGrace = 12
-SolarGraceBenefit = 0.0167
-
-#Solar Blessing
 MaxSolarBlessing = 6
-SolarBlessingBenefit = 0.03333
-
-#Solar Protection
 MaxSolarProtection = 2
-SolarProtectionBenefit = 0.1
 
 ### ARRAY DECLARATIONS ###
 Attempts = []
 AttemptsforAVG = []
 Costs = []
 SolarHelp = []
+LowestCost = []
 
 
 ### Which Help? ###
@@ -99,6 +134,7 @@ for y in range(0, MaxHelp+1):
                                    
                     if ArtisanEnergy >= 1:
                         #print("pity")
+                        NumofAttempts += 1
                         passfail = True
                 else:
                     passfail = True
@@ -109,6 +145,7 @@ for y in range(0, MaxHelp+1):
                     ArtisanEnergy += (ChanceToHone + (SolarGraceBenefit * UsedSolarGrace)) * 0.465
                                    
                     if ArtisanEnergy >= 1:
+                        NumofAttempts += 1
                         passfail = True
                 else:
                     passfail = True
@@ -132,3 +169,4 @@ for y in range(0, MaxHelp+1):
 print("Solar Help", "\tAverage Cost", "\tAverage Number of Attempts")
 for i in SolarHelp:
     print(SolarHelp.index(i), "\t \t" , "%.2f"  %i, "\t" , "%.3f" %AttemptsforAVG[SolarHelp.index(i)])
+print(min(SolarHelp), SolarHelp.index(min(SolarHelp)))

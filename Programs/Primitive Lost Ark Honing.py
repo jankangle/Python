@@ -1,4 +1,5 @@
 #PYTHON TIME
+from pydoc import doc
 import random
 
 def _sum(arr):
@@ -26,7 +27,7 @@ SolarProtectionCost = 431.6667      # Solar Protection
 ChanceToHone = 0.6
 NumOfDestructionStones = 250
 NumOfHonorLeapStones = 8
-
+PityChance = ChanceToHone * 0.1
 
 ### HELP ITEMS ###
 #Solar Grace
@@ -77,17 +78,33 @@ for y in range(0, MaxHelp+1):
         TotalHelp = (SolarGraceBenefit * UsedSolarGrace) + (SolarBlessingBenefit * UsedSolarBlessing) + (SolarProtectionBenefit * UsedSolarProtection)
         HelpCost = (UsedSolarGrace * SolarGraceCost) + (UsedSolarBlessing * SolarBlessingCost) + (UsedSolarProtection * SolarProtectionCost)
         passfail = False
-        NumofAttempts=0
+        NumofAttempts = 0
         TotalCost = DestructionStonesCost * NumOfDestructionStones + HonorLeapStonesCost * NumOfHonorLeapStones + HelpCost
         ArtisanEnergy = 0
+    
         while passfail == False:
             NumofAttempts += 1
-            if random.random() >= ChanceToHone + ArtisanEnergy + TotalHelp:
-                ArtisanEnergy += (ChanceToHone + (SolarGraceBenefit * UsedSolarGrace)) / 10                       
-                if ArtisanEnergy >= 1:
-                    break
+
+            if (NumofAttempts > 1):
+                if random.random() >= ChanceToHone + ArtisanEnergy + TotalHelp + PityChance:
+                    ArtisanEnergy += (ChanceToHone + (SolarGraceBenefit * UsedSolarGrace + PityChance) *0.465)
+                                   
+                    if ArtisanEnergy >= 1:
+                        print("pity")
+                        break
+                else:
+                    passfail = True
+
             else:
-                passfail = True
+                
+                if random.random() >= ChanceToHone + ArtisanEnergy + TotalHelp:
+                    ArtisanEnergy += (ChanceToHone + (SolarGraceBenefit * UsedSolarGrace) *0.465)
+                                   
+                    if ArtisanEnergy >= 1:
+                        break
+                else:
+                    passfail = True
+
         TotalCost *= NumofAttempts
         ###Debugging Purposes ###
         #print("Help Number: " ,y)

@@ -1,7 +1,5 @@
 #PYTHON TIME
-from audioop import avg
 import random
-from re import A
 import timeit
 def _sum(arr):
     sum =0

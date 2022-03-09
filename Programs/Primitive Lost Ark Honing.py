@@ -1,4 +1,5 @@
 #PYTHON TIME
+from audioop import avg
 import random
 from re import A
 import timeit
@@ -288,8 +289,10 @@ for z in range(0, 15):
     #    print(SolarHelp.index(i), "\t \t" , "%.2f"  %i, "\t" , "%.3f" %AttemptsforAVG[SolarHelp.index(i)])
 
     #print( "%.2f" % min(SolarHelp), "\t",SolarHelp.index(min(SolarHelp)), "\t\t%.3f" % ArtisanEnergy)#, "\t", "%.3f" % ArtisanEnergy)
-    print(z+1, "\t\t",SolarHelp.index(min(SolarHelp)),"\t\t%.3f" % ArtisanEnergy)
+    #print(z+1, "\t\t",SolarHelp.index(min(SolarHelp)),"\t\t%.3f" % ArtisanEnergy)
+    print(z+1, "\t\t",SolarHelp.index(min(SolarHelp)))
     if nut == True:
         break
 stop = timeit.default_timer()
+print("Average Cost: ","%.2f" % (_sum(SolarHelp)/len(SolarHelp)))
 print('Program Run Time: ', "%.2f"  % (stop - start), "seconds")

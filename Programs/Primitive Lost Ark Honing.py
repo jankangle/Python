@@ -21,13 +21,14 @@ NumofIterations = 1000000
 #UPDATE THESE
 CrystalToGold = 806/95
 
-DestructionStonesCost = 108 / 10      # Destruction Stone Crystals
-GuardianStoneCost = 65 / 10           # Guardian Stone Crystals  
-HonorLeapStonesCost = 213             # Honor Leapstones
-SolarGraceCost = 75                   # Solar Grace
-#SolarGraceCost = CrystalToGold * 80 / 20 #Crystal Price
-SolarBlessingCost = 287               # Solar Blessing
-SolarProtectionCost = 694             # Solar Protection
+DestructionStonesCost = 90 / 10             # Destruction Stone Crystals
+GuardianStoneCost = 60 / 10                 # Guardian Stone Crystals  
+HonorLeapStonesCost = 236                   # Honor Leapstones
+OrehaCost = 18                              # Simple Oreha Fusion Material
+SolarGraceCost = 110                       # Solar Grace
+#SolarGraceCost = CrystalToGold * 80 / 20    #Crystal Price
+SolarBlessingCost = 345                     # Solar Blessing
+SolarProtectionCost = 800                   # Solar Protection
 
 HoneLVL = int(input("Enter Item Hone LVL Target: "))
 ArmOrWeap = input("(W)eapon or (A)rmor: ")
@@ -39,8 +40,10 @@ if HoneLVL == 7:
     NumOfGuardianStones = 156
     if ArmOrWeap == "W":
         NumOfHonorLeapStones = 8
+        OrehaCost = 4
     elif ArmOrWeap == "A":
         NumOfHonorLeapStones = 4
+        OrehaCost = 2
     SolarGraceBenefit = 0.0167
     SolarBlessingBenefit = 0.03333
     SolarProtectionBenefit = 0.1
@@ -50,8 +53,10 @@ elif HoneLVL == 8:
     NumOfGuardianStones = 156
     if ArmOrWeap == "W":
         NumOfHonorLeapStones = 8
+        OrehaCost = 4
     elif ArmOrWeap == "A":
         NumOfHonorLeapStones = 4
+        OrehaCost = 2
     SolarGraceBenefit = 0.0125
     SolarBlessingBenefit = 0.025
     SolarProtectionBenefit = 0.075
@@ -61,8 +66,10 @@ elif HoneLVL == 9:
     NumOfGuardianStones = 156
     if ArmOrWeap == "W":
         NumOfHonorLeapStones = 8
+        OrehaCost = 4
     elif ArmOrWeap == "A":
         NumOfHonorLeapStones = 4
+        OrehaCost = 2
     SolarGraceBenefit = 0.0084
     SolarBlessingBenefit = 0.0167
     SolarProtectionBenefit = 0.05
@@ -72,67 +79,79 @@ elif HoneLVL == 10:
     NumOfGuardianStones = 192
     if ArmOrWeap == "W":
         NumOfHonorLeapStones = 10
+        OrehaCost = 4
     elif ArmOrWeap == "A":
         NumOfHonorLeapStones = 6
+        OrehaCost = 4
     SolarGraceBenefit = 0.0084
     SolarBlessingBenefit = 0.0167
     SolarProtectionBenefit = 0.05
-### Experimental Benefits ###
 elif HoneLVL == 11:
     ChanceToHone = 0.30
     NumOfDestructionStones = 320
     NumOfGuardianStones = 192
     if ArmOrWeap == "W":
         NumOfHonorLeapStones = 10
+        OrehaCost = 4
     elif ArmOrWeap == "A":
         NumOfHonorLeapStones = 6
-    SolarGraceBenefit = 0.0125
-    SolarBlessingBenefit = 0.025
-    SolarProtectionBenefit = 0.075
+        OrehaCost = 4
+    SolarGraceBenefit = 0.0084
+    SolarBlessingBenefit = 0.0167
+    SolarProtectionBenefit = 0.05
 elif HoneLVL == 12:
     ChanceToHone = 0.30
     NumOfDestructionStones = 320
     NumOfGuardianStones = 192
     if ArmOrWeap == "W":
         NumOfHonorLeapStones = 10
+        OrehaCost = 4
     elif ArmOrWeap == "A":
         NumOfHonorLeapStones = 6
-    SolarGraceBenefit = 0.0125
-    SolarBlessingBenefit = 0.025
-    SolarProtectionBenefit = 0.075
+        OrehaCost = 4
+    SolarGraceBenefit = 0.0021
+    SolarBlessingBenefit = 0.0042
+    SolarProtectionBenefit = 0.0125
+### Experimental Benefits ###
 elif HoneLVL == 13:
     ChanceToHone = 0.15
     NumOfDestructionStones = 380
     NumOfGuardianStones = 228
     if ArmOrWeap == "W":
         NumOfHonorLeapStones = 10
+        OrehaCost = 6
     elif ArmOrWeap == "A":
         NumOfHonorLeapStones = 6
-    SolarGraceBenefit = 0.0125
-    SolarBlessingBenefit = 0.025
-    SolarProtectionBenefit = 0.075
+        OrehaCost = 4
+    SolarGraceBenefit = 0.0084
+    SolarBlessingBenefit = 0.0167
+    SolarProtectionBenefit = 0.05
 elif HoneLVL == 14:
     ChanceToHone = 0.15
     NumOfDestructionStones = 380
     NumOfGuardianStones = 228
     if ArmOrWeap == "W":
         NumOfHonorLeapStones = 12
+        OrehaCost = 6
     elif ArmOrWeap == "A":
         NumOfHonorLeapStones = 6
-    SolarGraceBenefit = 0.0125
-    SolarBlessingBenefit = 0.025
-    SolarProtectionBenefit = 0.075
+        OrehaCost = 4
+    SolarGraceBenefit = 0.0084
+    SolarBlessingBenefit = 0.0167
+    SolarProtectionBenefit = 0.05
 elif HoneLVL == 15:
     ChanceToHone = 0.1
     NumOfDestructionStones = 380
     NumOfGuardianStones = 228
     if ArmOrWeap == "W":
         NumOfHonorLeapStones = 12
+        OrehaCost = 6
     elif ArmOrWeap == "A":
         NumOfHonorLeapStones = 6
-    SolarGraceBenefit = 0.0125
-    SolarBlessingBenefit = 0.025
-    SolarProtectionBenefit = 0.075
+        OrehaCost = 4
+    SolarGraceBenefit = 0.0084
+    SolarBlessingBenefit = 0.0167
+    SolarProtectionBenefit = 0.05
 else:
     print("Wrong")
     exit()  
@@ -213,7 +232,7 @@ for z in range(0, 15):
             HelpCost = (UsedSolarGrace * SolarGraceCost) + (UsedSolarBlessing * SolarBlessingCost) + (UsedSolarProtection * SolarProtectionCost)
             passfail = False
             NumofAttempts = 0
-            TotalCost = DestructionStonesCost * NumOfDestructionStones + HonorLeapStonesCost * NumOfHonorLeapStones + HelpCost
+            TotalCost = DestructionStonesCost * NumOfDestructionStones + HonorLeapStonesCost * NumOfHonorLeapStones + HelpCost + OrehaCost
             if z == 0:
                 ArtisanEnergy = 0
             else:

@@ -21,17 +21,22 @@ NumofIterations = 1000000
 #UPDATE THESE
 CrystalToGold = 806/95
 
-DestructionStonesCost = 90 / 10             # Destruction Stone Crystals
-GuardianStoneCost = 60 / 10                 # Guardian Stone Crystals  
-HonorLeapStonesCost = 236                   # Honor Leapstones
+DestructionStonesCost = 74 / 10             # Destruction Stone Crystals
+GuardianStoneCost = 50 / 10                 # Guardian Stone Crystals  
+HonorLeapStonesCost = 252                   # Honor Leapstones
 OrehaCost = 18                              # Simple Oreha Fusion Material
-SolarGraceCost = 110                       # Solar Grace
+SolarGraceCost = 123                       # Solar Grace
 #SolarGraceCost = CrystalToGold * 80 / 20    #Crystal Price
-SolarBlessingCost = 345                     # Solar Blessing
-SolarProtectionCost = 800                   # Solar Protection
+SolarBlessingCost = 370                     # Solar Blessing
+SolarProtectionCost = 900                   # Solar Protection
 
 HoneLVL = int(input("Enter Item Hone LVL Target: "))
 ArmOrWeap = input("(W)eapon or (A)rmor: ")
+
+### MAX HELP ITEMS ###
+MaxSolarGrace = 12
+MaxSolarBlessing = 6
+MaxSolarProtection = 2
 
 
 if HoneLVL == 7:
@@ -114,6 +119,9 @@ elif HoneLVL == 12:
     SolarProtectionBenefit = 0.0125
 ### Experimental Benefits ###
 elif HoneLVL == 13:
+    MaxSolarGrace = 24 #Not sure
+    MaxSolarBlessing = 12
+    MaxSolarProtection = 4
     ChanceToHone = 0.15
     NumOfDestructionStones = 380
     NumOfGuardianStones = 228
@@ -127,6 +135,9 @@ elif HoneLVL == 13:
     SolarBlessingBenefit = 0.0167
     SolarProtectionBenefit = 0.05
 elif HoneLVL == 14:
+    MaxSolarGrace = 24 #Not sure
+    MaxSolarBlessing = 12
+    MaxSolarProtection = 4
     ChanceToHone = 0.15
     NumOfDestructionStones = 380
     NumOfGuardianStones = 228
@@ -140,6 +151,9 @@ elif HoneLVL == 14:
     SolarBlessingBenefit = 0.0167
     SolarProtectionBenefit = 0.05
 elif HoneLVL == 15:
+    MaxSolarGrace = 24 #Not sure
+    MaxSolarBlessing = 12
+    MaxSolarProtection = 4
     ChanceToHone = 0.1
     NumOfDestructionStones = 380
     NumOfGuardianStones = 228
@@ -161,10 +175,7 @@ else:
     print("Bro why", ArmOrWeap)
     exit()
 PityChance = ChanceToHone * 0.1
-### MAX HELP ITEMS ###
-MaxSolarGrace = 12
-MaxSolarBlessing = 6
-MaxSolarProtection = 2
+
 
 ### ARRAY DECLARATIONS ###
 #Attempts = []

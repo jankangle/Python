@@ -22,19 +22,30 @@ One of the job functions is to track and monitor, locomotive movements between r
 
 interchange_chain_rules = [
     {
-        'name':'A-B @  US/Can 1',
+        'name':'ARR-CP @  US/Can 1',
         'direction': 'ToCP',
         'rules': [
             {'READER_NM': 'READER00', 'DIR': 'N'},
             {'READER_NM': 'READER01', 'DIR': 'N'},
             {'READER_NM': 'READER02', 'DIR': 'N'},
         ],
-        'RR':'A RailRoad',
+        'RR':'ARR',
+        'reader_index': 1,
+    },
+    {
+        'name':'CP-ARR @  US/Can 1',
+        'direction': 'FrCP',
+        'rules': [
+            {'READER_NM': 'READER02', 'DIR': 'S'},
+            {'READER_NM': 'READER01', 'DIR': 'S'},
+            {'READER_NM': 'READER00', 'DIR': 'S'},
+        ],
+        'RR':'ARR',
         'reader_index': 1,
     },
 ]
 
-1. Where reader_index indicates the interchange reader. Can you provide a solution using SQL and/or Python to give all the locomotives that interchange based on the rule 'A-B @ US/Can 1'?
+1. Where reader_index indicates the interchange reader. Can you provide a solution using SQL and/or Python to give all the locomotives that interchange based on the rule 'ARR-CP @  US/Can 1'?
 
 1a. How would this answer scale/change if there were 100 rules for 100 different locations?
 

@@ -1,10 +1,11 @@
-Table: AEI Events
+Table: Locomotive Traffic Events
 Column Name | Type
 Mark_CD | VarChar
 Unit_Num | int
 AEI_Num | int
 Direction | VarChar
 Read_Time | date
+Titan_NBR | float
 
 Table: AEI Readers
 Column Name | Type
@@ -13,6 +14,14 @@ READER_NM | VarChar
 gps_lat | float
 gps_long | float
 subdivision | VarChar
+
+Table: Train Events
+Column Name | Type
+Event_Dtm | date
+Train_Nm | VarChar
+Train_Dir | VarChar
+Titan_NBR | float
+Train_Type | VarChar
 
 Automatic Equipment Identifcation (AEI) is a system used to track movements of locomotives, railcars, etc. When a locomotive passes a reader on a track, it will generate an event that indicates what the locomotive mark, unit number, the name of the reader, direction of travel for the locomotive, and the datetime of the event.
 
@@ -48,6 +57,7 @@ interchange_chain_rules = [
 1. Where reader_index indicates the interchange reader. Can you provide a solution using SQL and/or Python to give all the locomotives that interchange based on the rule 'ARR-CP @  US/Can 1'?
 
 1a. How would this answer scale/change if there were 100 rules for 100 different locations?
+1b. How would you count the different types of trains that were passing through each interchange location?
 
 Example 1:
 MARK_CD	Unit_Num	Reader_NM	Direction	Read_TIME
@@ -83,3 +93,11 @@ Desired Output
 Unit	Interchange Time
 CP 1234	2024-07-01 12:46:00
 CP 1237	2024-07-02 05:14:00
+
+Example 2:
+Train Type Count
+Coal 3
+Grain 5
+Intermodal 10
+
+

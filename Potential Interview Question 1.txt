@@ -1,0 +1,66 @@
+Table: AEI Events
+Column Name | Type
+Mark_CD | VarChar
+Unit_Num | int
+Reader_NM | VarChar
+Direction | VarChar
+Read_Time | date
+
+Automatic Equipment Identifcation (AEI) is a system used to track movements of locomotives, railcars, etc. When a locomotive passes a reader on a track, it will generate an event that indicates what the locomotive mark, unit number, the name of the reader, direction of travel for the locomotive, and the datetime of the event.
+
+An example of a locomotive would be "CP 1234" where "CP" is the Mark_CD and "1234" is the Unit_Num.
+
+One of the job functions is to track and monitor, locomotive movements between railroads. An exchange of locomotives between railroads is called an interchange. If an interchange is defined by the following rule below:
+
+interchange_chain_rules = [
+    {
+        'name':'A-B @  US/Can 1',
+        'direction': 'ToCP',
+        'rules': [
+            {'READER_NM': 'READER00', 'DIR': 'N'},
+            {'READER_NM': 'READER01', 'DIR': 'N'},
+            {'READER_NM': 'READER02', 'DIR': 'N'},
+        ],
+        'RR':'BNSF',
+        'reader_index': 1,
+    },
+]
+
+Where reader_index is 0-based, indicating the interchange reader. Therefore READER01 is considered the interchange reader and the corresponding datetime event of that reader is the interchange time. Can you provide a solution using SQL and/or Python to give all the locomotives that interchange based on the rule 'A-B @ US/Can 1'?
+
+How would this answer scale/change if there were 100 rules for 100 different locations?
+
+Example 1:
+MARK_CD	Unit_Num	Reader_NM	Direction	Read_TIME
+CP	1238	READER00	N	2024-07-01 01:44:00
+CP	1234	READER00	N	2024-07-01 01:54:00
+CP	1234	READER01	N	2024-07-01 12:46:00
+CP	1239	READER03	E	2024-07-01 17:24:00
+CP	1237	READER00	N	2024-07-01 17:59:00
+CP	1234	READER02	N	2024-07-02 01:11:00
+CP	1240	READER00	N	2024-07-02 01:18:00
+CP	1237	READER01	N	2024-07-02 05:14:00
+CP	1239	READER02	S	2024-07-02 07:43:00
+CP	1234	READER03	E	2024-07-02 13:55:00
+CP	1239	READER01	S	2024-07-02 16:28:00
+CP	1236	READER03	E	2024-07-02 22:59:00
+CP	1236	READER02	S	2024-07-03 10:04:00
+CP	1240	READER01	N	2024-07-03 12:33:00
+CP	1236	READER01	S	2024-07-03 17:16:00
+CP	1240	READER03	E	2024-07-03 17:36:00
+CP	1237	READER02	N	2024-07-03 17:59:00
+CP	1235	READER03	W	2024-07-03 20:41:00
+CP	1238	READER02	N	2024-07-03 21:53:00
+CP	1239	READER00	S	2024-07-03 22:07:00
+CP	1237	READER03	W	2024-07-03 23:07:00
+CP	1236	READER00	S	2024-07-04 03:44:00
+CP	1238	READER03	E	2024-07-04 14:09:00
+CP	1235	READER02	S	2024-07-04 16:58:00
+CP	1235	READER01	S	2024-07-05 02:09:00
+CP	1235	READER00	S	2024-07-06 22:07:00
+
+
+Desired Output
+Unit	Interchange Time
+CP 1234	2024-07-01 12:46:00
+CP 1237	2024-07-02 05:14:00

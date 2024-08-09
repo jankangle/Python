@@ -21,7 +21,7 @@ interchange_chain_rules = [
             {'READER_NM': 'READER01', 'DIR': 'N'},
             {'READER_NM': 'READER02', 'DIR': 'N'},
         ],
-        'RR':'BNSF',
+        'RR':'A RailRoad',
         'reader_index': 1,
     },
 ]

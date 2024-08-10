@@ -57,7 +57,8 @@ interchange_chain_rules = [
 1. Where reader_index indicates the interchange reader. Can you provide a solution using SQL and/or Python to give all the locomotives that interchange based on the rule 'ARR-CP @  US/Can 1'?
 
 1a. How would this answer scale/change if there were 100 rules for 100 different locations?
-1b. How would you count the different types of trains that were passing through each interchange location?
+1b. How would you count the different types of trains that were passing through each interchange location? ie Example 2
+1c. Using the interchange rule 'CP-ARR @  US/Can 1' How would you determine the length of time a locomotive was interchanged offline or online?
 
 Example 1:
 MARK_CD	Unit_Num	Reader_NM	Direction	Read_TIME
@@ -100,4 +101,6 @@ Coal 3
 Grain 5
 Intermodal 10
 
-
+----------------------------------------------------------------
+Notes:
+1. Show

@@ -100,7 +100,3 @@ Train Type Count
 Coal 3
 Grain 5
 Intermodal 10
-
-----------------------------------------------------------------
-Notes:
-1. Show

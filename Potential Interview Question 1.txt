@@ -2,18 +2,10 @@ Table: Locomotive Traffic Events
 Column Name | Type
 Mark_CD | VarChar
 Unit_Num | int
-AEI_Num | int
+READER_NM | VarChar
 Direction | VarChar
 Read_Time | date
 Titan_NBR | float
-
-Table: AEI Readers
-Column Name | Type
-AEI_Num | int
-READER_NM | VarChar
-gps_lat | float
-gps_long | float
-subdivision | VarChar
 
 Table: Train Events
 Column Name | Type
@@ -54,10 +46,8 @@ interchange_chain_rules = [
     },
 ]
 
-1. Where reader_index indicates the interchange reader. Can you provide a solution using SQL and/or Python to give all the locomotives that interchange based on the rule 'ARR-CP @  US/Can 1'?
-
-1a. How would this answer scale/change if there were 100 rules for 100 different locations?
-1b. How would you count the different types of trains that were passing through each interchange location? ie Example 2
+1a. Where reader_index indicates the interchange reader. Can you provide a solution using SQL and/or Python to give all the locomotives that interchange based on the rule 'ARR-CP @  US/Can 1'?
+1b. How would this answer scale/change if there were 100 rules for 100 different locations?
 1c. Using the interchange rule 'CP-ARR @  US/Can 1' How would you determine the length of time a locomotive was interchanged offline or online?
 
 Example 1:
@@ -95,8 +85,8 @@ Unit	Interchange Time
 CP 1234	2024-07-01 12:46:00
 CP 1237	2024-07-02 05:14:00
 
-Example 2:
-Train Type Count
-Coal 3
-Grain 5
-Intermodal 10
+--------------------------------
+Notes:
+1a. Look at their code, get them to thoroughly explain their answer. (Multiple methods to get to the answer). Ideally they would be formulating an answer with scalability in mind
+1b. It probably would be too tedious and slow in SQL, so they may have to restructure their answer to be like my solution. Implementing threading vs concurrent.futures. Both introduce parallelization but with different benefits. Threading is good for I/O bound tasks (ie querying the database). So using threading we can use python to query the database in almost in parallel and gather the data significantly quicker (if db resources allow). Concurrent.futures is good for CPU-bound tasks. In my answer, matching the raw AEI outputs with the rules requires a lot of computational power, so maximizing the CPU by performing independent calculations concurrently allow for the process to be quicker.
+1c. From a solution like mine, once a list of interchanges is generated, we pair up the start and end interchange times, and calculate the difference. Curious to see other approaches to this.
